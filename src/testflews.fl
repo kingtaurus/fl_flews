@@ -1,290 +1,293 @@
 # data file for the Fltk User Interface Designer (fluid)
-version 1.0300 
-header_name {.h} 
+version 1.0302
+header_name {.h}
 code_name {.cpp}
-decl {\#include <stdio.h>} {} 
+decl {\#include <stdio.h>} {private local
+}
 
-decl {\#include <math.h>} {} 
+decl {\#include <math.h>} {private local
+}
 
-decl {\#include <FL/Fl_flews.h>} {public
-} 
+decl {\#include <FL/Fl_flews.h>} {public local
+}
 
 Function {} {open
 } {
-  Fl_Window {} {
+  Fl_Window testflews {
     label testflews open
-    xywh {334 47 640 500} type Double color 52 resizable visible
+    xywh {60 359 640 500} type Double color 52 resizable visible
   } {
-    Fl_Group {} {open
+    Fl_Group fl_group_one {open
       xywh {5 5 439 189} box ENGRAVED_FRAME
     } {
-      Fl_Box {} {
+      Fl_Box fl_slider_input_box_one {
         label Fl_Value_Slider_Input
         xywh {5 5 155 25} align 64
       }
-      Fl_Value_Slider {} {
+      Fl_Value_Slider fl_slider_input_one {
         label {test:}
         xywh {55 35 160 25} type {Horz Fill} labelsize 12 align 68 value 0.2 textsize 11
         class Fl_Value_Slider_Input
       }
-      Fl_Value_Slider {} {
+      Fl_Value_Slider fl_slider_input_two {
         label {test:}
         xywh {55 65 160 20} type Horizontal box THIN_DOWN_BOX labelsize 12 align 68 value 0.5 textsize 11
         class Fl_Value_Slider_Input
       }
-      Fl_Value_Slider {} {
+      Fl_Value_Slider fl_slider_input_three {
         label {test:}
         xywh {55 90 160 25} type {Horz Knob} labelsize 12 align 68 value 0.1 textsize 11
         class Fl_Value_Slider_Input
       }
-      Fl_Value_Slider {} {
+      Fl_Value_Slider fl_slider_input_four {
         label {test:}
         xywh {55 160 160 20} type {Horz Fill} labelsize 12 align 68 value 0.233 textsize 11
-        code0 {o->textboxsize(50);}
+        code0 {fl_slider_input_four->textboxsize(50);}
         class Fl_Value_Slider_Input
       }
-      Fl_Value_Slider {} {
+      Fl_Value_Slider fl_slider_input_five {
         label {test:}
         xywh {220 30 30 155} box ENGRAVED_BOX color 213 selection_color 1 labelsize 12 align 1 value 0.4 textsize 11 textcolor 4
         class Fl_Value_Slider_Input
       }
-      Fl_Value_Slider {} {
+      Fl_Value_Slider fl_slider_input_six {
         label {test:}
         xywh {255 30 40 155} type {Vert Knob} box THIN_UP_BOX color 190 selection_color 6 labelsize 12 align 65 value 0.7 textsize 11 textcolor 1
         class Fl_Value_Slider_Input
       }
-      Fl_Value_Slider {} {
+      Fl_Value_Slider fl_slider_input_seven {
         label {The height of the input box is set automatically from the text height in vertical sliders:}
         xywh {300 50 135 135} type {Vert Fill} color 51 selection_color 12 labelsize 11 align 197 value 0.7 textsize 34
         class Fl_Value_Slider_Input
       }
-      Fl_Box {} {
+      Fl_Box fl_slider_input_box_two {
         label {The size of the input box is set using the "textboxsize" function on horizontal sliders:}
         xywh {5 120 215 35} labelsize 10 align 212
       }
     }
-    Fl_Group {} {open
+    Fl_Group fl_group_two {open
       xywh {6 197 299 140} box ENGRAVED_FRAME
     } {
-      Fl_Box {} {
-        label Fl_Value_Input_Spin selected
+      Fl_Box fl_box_vis_one {
+        label Fl_Value_Input_Spin
         xywh {6 197 150 25} align 64
       }
-      Fl_Value_Input {} {
+      Fl_Value_Input fl_vis_one {
         label {value:}
         xywh {65 223 65 25} box THIN_DOWN_BOX color 52 labelsize 12 align 68 minimum -1 step 0.1 value -0.2 textsize 11
         class Fl_Value_Input_Spin
       }
-      Fl_Value_Input {} {
+      Fl_Value_Input fl_vis_two {
         label {value:}
         xywh {205 223 75 25} box PLASTIC_DOWN_BOX labelsize 12 align 68 minimum -1 step 0.01 value 0.22 textsize 11
         class Fl_Value_Input_Spin
       }
-      Fl_Value_Input {} {
+      Fl_Value_Input fl_vis_three {
         label {value:}
         xywh {66 284 65 30} box EMBOSSED_BOX labelsize 12 align 68 step 0.01 textsize 11
-        code0 {o->buttonssize(33);}
+        code0 {fl_vis_three->buttonssize(33);}
         class Fl_Value_Input_Spin
       }
-      Fl_Value_Input {} {
+      Fl_Value_Input fl_vis_four {
         label {value:}
         xywh {206 282 66 35} box ROUND_UP_BOX labelsize 12 align 68 minimum -100 maximum 100 step 0.1 value 5 textsize 16
-        code0 {o->buttonssize(19);}
+        code0 {fl_vis_four->buttonssize(19);}
         class Fl_Value_Input_Spin
       }
-      Fl_Box {} {
+      Fl_Box fl_box_vis_two {
         label {The size (length) of the spin buttons can be modified with the "buttonssize" function:}
         xywh {6 249 299 35} labelsize 10 align 212
       }
     }
-    Fl_Group {} {open
+    Fl_Group fl_group_three {open
       xywh {451 135 180 58} box ENGRAVED_FRAME
     } {
-      Fl_Roller {} {
+      Fl_Roller fl_spin_1 {
         label {Spin test:}
-        callback {printf("Spin value: %d\\n",(int)(o->value()));}
+        callback {printf("Spin value: %d\\n",(int)(fl_spin_1->value()));}
         xywh {513 162 15 25} box THIN_UP_BOX selection_color 4 labelsize 11 align 68 maximum 1000 step 1
         class Fl_Spin
       }
-      Fl_Box {} {
+      Fl_Box fl_spin_box {
         label Fl_Spin
         xywh {451 135 73 19} align 64
       }
-      Fl_Roller {} {
+      Fl_Roller fl_spin_2 {
         label {Spin test:}
-        callback {printf("Spin value: %d\\n",(int)(o->value()));}
+        callback {printf("Spin value: %d\\n",(int)(fl_spin_2->value()));}
         xywh {546 162 15 25} box THIN_UP_BOX selection_color 1 labelsize 10 align 133 maximum 1000 step 1
         class Fl_Spin
       }
     }
-    Fl_Group {} {open
+    Fl_Group fl_group_four {open
       xywh {6 341 395 155} box ENGRAVED_FRAME align 65
     } {
-      Fl_Box {} {
+      Fl_Box fl_ball_box {
         label Fl_Ball
         xywh {6 341 65 20} align 64
       }
-      Fl_Roller {} {
+      Fl_Roller fl_ball_one {
         label {The Fl_Ball widget doesn't requires a 3d library:}
         callback {float rx,ry,rz;
-o->getrot(rx,ry,rz);
+fl_ball_one->getrot(rx,ry,rz);
 fprintf(stderr,"rx: %f ry:%f rz:%f\\n",rx,ry,rz);}
         xywh {21 401 94 88} box ROUND_DOWN_BOX color 52 selection_color 42 labelsize 10 align 197 minimum -360 maximum 360 step 1
         class Fl_Ball
       }
-      Fl_Roller {} {
+      Fl_Roller fl_ball_two {
         label {to get a wireframe ball set the roller type as horizontal:}
         callback {fprintf(stderr,"release callback\\n");}
         xywh {134 396 116 94} type Horizontal box ROUNDED_BOX color 53 selection_color 1 labelsize 10 align 197 when 4 minimum -360 maximum 360 step 1
-        code0 {o->ballscale(0.8);}
-        code1 {o->rotateball(M_PI/4.0,0.0,M_PI/8.0);}
+        code0 {fl_ball_two->ballscale(0.8);}
+        code1 {fl_ball_two->rotateball(M_PI/4.0,0.0,M_PI/8.0);}
         class Fl_Ball
       }
-      Fl_Roller {} {
+      Fl_Roller fl_b3 {
         label {It's possible to change the size of the ball (ballscale), and the number of stacks and slices:}
         xywh {268 392 123 97} box THIN_UP_BOX color 52 selection_color 4 labelsize 10 align 197 minimum -360 maximum 360 step 1
-        code0 {o->ballscale(0.9);}
-        code1 {o->stacks(6);}
-        code2 {o->slices(6);}
-        code3 {o->rotateball(M_PI/2.0);}
+        code0 {fl_b3->ballscale(0.9);}
+        code1 {fl_b3->stacks(6);}
+        code2 {fl_b3->slices(6);}
+        code3 {fl_b3->rotateball(M_PI/2.0);}
         class Fl_Ball
       }
     }
-    Fl_Group {} {open
+    Fl_Group fl_group_five {open
       xywh {447 3 186 125}
     } {
-      Fl_Box {} {
-        label {FLEWS 
+      Fl_Box fl_box_flews {
+        label {FLEWS
 Extended set of valuators for FLTK
 V 0.3.1}
         tooltip {Created by: Daniel Barrero (http://dbarrero.tripod.com)} xywh {451 3 178 125} box SHADOW_BOX color 7 selection_color 52 labelfont 1 labelsize 15 align 209
       }
-      Fl_Box {} {
+      Fl_Box fl_box_created_by {
         label {Created by: Daniel Barrero
  http://danielbarrero.com}
         xywh {473 87 141 32} labelsize 10 labelcolor 176 align 64
       }
     }
-    Fl_Group {} {
+    Fl_Group fl_group_six {
       label Fl_Multi_Value_Slider open
       xywh {308 197 325 144} box ENGRAVED_FRAME align 85
     } {
-      Fl_Slider {} {
+      Fl_Slider fl_mvsl_one {selected
         xywh {315 221 263 10} type Horizontal box FLAT_BOX selection_color 0 slider_size 1
-        code0 {o->splitseg(0);o->splitseg(0);}
+        code0 {fl_mvsl_one->splitseg(0);fl_mvsl_one->splitseg(0);}
         class Fl_Multi_Value_Slider
       }
-      Fl_Slider {} {
+      Fl_Slider fl_mvsl_two {
         xywh {314 236 264 16} type {Horz Knob} box FLAT_BOX selection_color 59
-        code0 {o->splitseg(0);}
+        code0 {fl_mvsl_two->splitseg(0);}
         class Fl_Multi_Value_Slider
       }
-      Fl_Slider {} {
+      Fl_Slider fl_mvsl_three {
         xywh {316 255 262 21} type Horizontal color 50 selection_color 4
-        code0 {o->splitseg(0);o->splitseg(1);}
-        code1 {o->middlevals(0);}
+        code0 {fl_mvsl_three->splitseg(0);}
+        code1 {fl_mvsl_three->splitseg(1);}
+        code2 {fl_mvsl_three->middlevals(0);}
         class Fl_Multi_Value_Slider
       }
-      Fl_Slider {} {
+      Fl_Slider fl_mvsl_four {
         xywh {606 203 21 132} box PLASTIC_DOWN_BOX selection_color 1
-        code0 {o->splitseg(0);o->splitseg(0);}
-        code1 {o->splitseg(1);o->splitseg(0);}
-        code2 {o->middlevals(0);}
+        code0 {fl_mvsl_four->splitseg(0);fl_mvsl_four->splitseg(0);}
+        code1 {fl_mvsl_four->splitseg(1);fl_mvsl_four->splitseg(0);}
+        code2 {fl_mvsl_four->middlevals(0);}
         class Fl_Multi_Value_Slider
       }
-      Fl_Box {} {
+      Fl_Box fl_mvsl_box {
         label {the size of the knob gives the direction of the triangles perpendicular to the slider direction, insert & delete keys allow to split, join the selected segment. the textcolor determines de selected section color, arrow color is given by the selection color}
         xywh {312 279 270 58} labelsize 10 align 212
       }
-      Fl_Value_Slider {} {
+      Fl_Value_Slider fl_mvsl_five {
         xywh {584 204 21 132} selection_color 3 textcolor 12
-        code0 {o->splitseg(0);}
-        code1 {o->middlevals(0);}
+        code0 {fl_mvsl_five->splitseg(0);}
+        code1 {fl_mvsl_five->middlevals(0);}
         class Fl_Multi_Value_Slider
       }
     }
-    Fl_Group {} {
-      label Fl_Pack_2D open
+    Fl_Group fl_group_seven {
+      label Fl_Pack_2D
       xywh {406 342 231 152} box ENGRAVED_FRAME align 85
     } {
-      Fl_Pack {} {
+      Fl_Pack fl_pack_2d_one {
         label Vertical open
         xywh {415 367 62 120} box THIN_UP_FRAME color 52 selection_color 19 labelsize 10 align 81
-        code0 {o->strips(2);}
+        code0 {fl_pack_2d_one->strips(2);}
         class Fl_Pack_2D
       } {
-        Fl_Button {} {
+        Fl_Button button_one {
           label 1
           xywh {420 383 25 25} box THIN_UP_BOX color 52
         }
-        Fl_Button {} {
+        Fl_Button button_two {
           label 2
           xywh {447 383 24 25} box THIN_UP_BOX color 52
         }
-        Fl_Button {} {
+        Fl_Button button_three {
           label 3
           xywh {421 411 25 25} box THIN_UP_BOX color 52
         }
-        Fl_Button {} {
+        Fl_Button button_four {
           label 4
           xywh {449 411 24 25} box THIN_UP_BOX color 52
         }
-        Fl_Button {} {
+        Fl_Button button_five {
           label 5
           xywh {422 438 25 25} box THIN_UP_BOX color 52
         }
-        Fl_Button {} {
+        Fl_Button button_six {
           label 6
           xywh {448 439 25 25} box THIN_UP_BOX color 52
         }
-        Fl_Button {} {
+        Fl_Button button_seven {
           label 7
           xywh {421 463 26 22} box THIN_UP_BOX color 52
         }
       }
-      Fl_Box {} {
-        label {works the same way as Fl_Pack, to set the number of rows/colums use the "strips" function, if you set a label it´ll draw it with a background color equal to the selection color if defined}
+      Fl_Box fl_group_eight {
+        label {works the same way as Fl_Pack, to set the number of rows/colums use the "strips" function, if you set a label it will draw it with a background color equal to the selection color if defined}
         xywh {493 347 140 81} labelsize 10 align 212
       }
-      Fl_Pack {} {
+      Fl_Pack fl_pack_2d_two {
         label {|} open
         xywh {490 432 131 57} type HORIZONTAL box THIN_UP_FRAME color 52 selection_color 19 align 84
-        code0 {o->strips(3);}
+        code0 {fl_pack_2d_two->strips(3);}
         class Fl_Pack_2D
       } {
-        Fl_Button {} {
+        Fl_Button button_one_two {
           label 1
           xywh {521 434 25 19} box THIN_UP_BOX color 52
         }
-        Fl_Button {} {
+        Fl_Button button_two_two {
           label 2
           xywh {522 453 26 20} box THIN_UP_BOX color 52
         }
-        Fl_Button {} {
+        Fl_Button button_three_two {
           label 3
           xywh {522 473 27 14} box THIN_UP_BOX color 52
         }
-        Fl_Button {} {
+        Fl_Button button_four_two {
           label 4
           xywh {550 434 25 19} box THIN_UP_BOX color 52
         }
-        Fl_Button {} {
+        Fl_Button button_five_two {
           label 5
           xywh {552 453 23 17} box THIN_UP_BOX color 52
         }
-        Fl_Button {} {
+        Fl_Button button_six_two {
           label 6
           xywh {551 471 25 15} box THIN_UP_BOX color 52
         }
-        Fl_Button {} {
+        Fl_Button button_seven_two {
           label 7
           xywh {579 434 25 15} box THIN_UP_BOX color 52
         }
-        Fl_Button {} {
+        Fl_Button button_eight_two {
           label 8
           xywh {580 452 25 15} box THIN_UP_BOX color 52
         }
-        Fl_Button {} {
+        Fl_Button button_nine_two {
           label 9
           xywh {582 471 25 15} box THIN_UP_BOX color 52
         }
