@@ -1,12 +1,11 @@
-README - Fl_flews Version 0.3.1
-------------------------------------
+README - fl_flews 0.3.1
+=======================
 
-WHAT IS Fl_flews
+WHAT IS fl_flews
+----------------
+**fl_flews** is a set of additional extended widgets for the excellent FLTK library.
 
-    Fl_flews is a set of additional extended widgets for the excellent 
-    FLTK library.
-    
-    This library contains the following widgets:
+This library contains the following widgets:
     
     Fl_Value_Slider_Input : Similar to the Fl_Value_Slider widget
                             with an added editable text field.
@@ -58,6 +57,8 @@ AUTHORS
 
     A big thanks to everybody contributing to the development of Fltk, 
     especially Bill Spitzak.
+    
+    Update to cmake was done by Gregory King < greg.james.king@gmail.com >
     
 LICENSING
 
