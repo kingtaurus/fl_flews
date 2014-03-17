@@ -30,19 +30,19 @@ This library contains the following widgets:
 
 Flews also contains the following helper functions and classes:
 
-   gl_image:                Converts an FLTK shared image Fl_Image into an 
+    gl_image:               Converts an FLTK shared image Fl_Image into an 
                             openGL texture, works the same way as glTexImage
                             and converts all registered image formats of FLTK 
                             into whatever internal ogl format you want.
 
-   Fl_Quaternion:           Quaternion handling class, allows conversions 
+    Fl_Quaternion:          Quaternion handling class, allows conversions 
                             from/to vector-angle, matrix, euler. 
 
-   fl_trackball:            includes a trackball implementation, uses the
+    fl_trackball:           includes a trackball implementation, uses the
                             Fl_Quaternion class (defined on the same file as the
                             quaternion class).
    
-   fl_rotMatrixToEuler:     Receives a 4x4 rotation matrix and converts it to a
+    fl_rotMatrixToEuler:    Receives a 4x4 rotation matrix and converts it to a
                             set of euler angles (around axis (x,y,z)).
 
 AUTHORS
