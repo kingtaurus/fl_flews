@@ -45,7 +45,7 @@ set(libdir          ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 set(includedir      ${CMAKE_INSTALL_PREFIX}/include)
 set(PACKAGE_VERSION ${LIBFLEWS_VERSION})
 set(LIBS            "-L${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR} -lflews -lm -ldl")
-set(Cflags          "-I${includedir}")
+set(Cflags          "-I${includedir} -std=c++11")
 
 #flews.pc (to configure the library)
 
