@@ -16,7 +16,7 @@ This library contains the following widgets:
     
     Fl_Ball :               A 3D ball widget, Works as a virtual trackball,
                             it's similar to the rotate widget of GLUI(see below)
-			    but doesn't requires a 3D library (it uses the
+                            but doesn't requires a 3D library (it uses the
                             included Fl_Quaternion class for calculating the
                             ball orientation)
 			    
