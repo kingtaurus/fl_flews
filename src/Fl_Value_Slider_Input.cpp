@@ -8,6 +8,9 @@
 #include <stdio.h>
 #include "FL/Fl_Value_Slider_Input.H"
 
+#ifndef UNUSED
+#define UNUSED(expr) do { (void)(expr); } while (0)
+#endif
 
 static char hack_o_rama;
 
@@ -25,10 +28,25 @@ void Fl_Value_Slider_Input::input_cb(Fl_Widget*, void* v) {
 
 void Fl_Value_Slider_Input::draw() {
 
-  int sxx = x(), syy = y(), sww = w(), shh = h();
-  int bxx = x(), byy = y(), bww = w(), bhh = h();
-  int X = x(), Y = y(), W = w(), H = h();
-  
+  int sxx = x(); 
+	int syy = y();
+	int sww = w();
+	int shh = h();
+
+  int bxx = x();
+	int byy = y();
+	int bww = w();
+	int bhh = h();
+
+  int X = x();
+	int Y = y();
+	int W = w();
+	int H = h();
+
+	UNUSED(bxx); 
+	UNUSED(byy);
+	UNUSED(bhh);
+
   int border_size=Fl::box_dx(box());
 
   if (horizontal()) {

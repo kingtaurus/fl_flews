@@ -145,7 +145,6 @@ void Fl_Quaternion::fromEuler(float x,float y, float z)
 }
 void Fl_Quaternion::fromEuler(float p[3])
 {
- int i;
  Fl_Quaternion qt,q1;
  float a[3]={ 1.0, 0.0, 0.0 };
  qt.fromAxis(p[0],a);

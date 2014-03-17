@@ -8,6 +8,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#ifndef UNUSED
+#define UNUSED(expr) do { (void)(expr); } while (0)
+#endif
+
 double Fl_Multi_Value_Slider::normval(double v)
 {
   double val;
@@ -120,7 +124,7 @@ int Fl_Multi_Value_Slider::setsegments(int n, double *slist)
 {
  int i;
 
- if(n<=0 || slist==NULL)
+ if(n<=0 || slist==nullptr)
    return FL_VALUESEG_INVALID;
 
  nsegs=n;
@@ -131,7 +135,9 @@ int Fl_Multi_Value_Slider::setsegments(int n, double *slist)
     segments[i].right=slist[i*3+2];
  }
  if(currseg>=nsegs)
+ {
    currseg=nsegs-1;
+ }
  return nsegs;
 }
 
@@ -141,8 +147,10 @@ double * Fl_Multi_Value_Slider::getsegments(int &n)
  double *slist;
 
  n=nsegs;
- if(nsegs<=0); 
-   return NULL;
+ if(nsegs<=0)
+ {
+   return nullptr;
+ }
  slist=(double *)malloc(sizeof(double)*nsegs);
  for(i=0; i<n; i++) {
     slist[i*3]=segments[i].left;
@@ -280,9 +288,9 @@ void Fl_Multi_Value_Slider::draw()
 int Fl_Multi_Value_Slider::handle(int event, int X, int Y, int W, int H)
 {
  int mx,ww,iseg,l,r,m,S;
- int slider_resp; 
- double oval=value();
- double val,nval;
+ int slider_resp;
+ double val = value();
+ double nval;
  X+=Fl::box_dx(box());
  Y+=Fl::box_dy(box());
  W-=Fl::box_dw(box());

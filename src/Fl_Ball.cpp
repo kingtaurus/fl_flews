@@ -24,6 +24,9 @@
 #define _FL_DEGTORAD(x)	     (x*_FL_M_PI180) 
 #define _FL_RADTODEG(x)	     (x*_FL_M_180PI)
 
+#ifndef UNUSED
+#define UNUSED(expr) do { (void)(expr); } while (0)
+#endif
 
 void Fl_Ball::rotateball(float rotx,float roty,float rotz)
 {
@@ -236,6 +239,7 @@ void Fl_Ball::increment_cb() {
 }
 
 void Fl_Ball::handle_drag(double v) {
+	UNUSED(v);
   value_damage();
   if (when() & FL_WHEN_CHANGED) do_callback();
   else set_changed();

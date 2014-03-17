@@ -5,11 +5,17 @@
 #include <FL/Fl_Shared_Image.H>
 #include "FL/gl_image.hpp"
 
+#ifndef UNUSED
+#define UNUSED(expr) do { (void)(expr); } while (0)
+#endif
+
 #define GL_CHECK_ERROR(str)                                        \
 {                                                                  \
-    GLenum error;                                                  \
-    if(error = glGetError())                                       \
-       fprintf(stderr,"GL Error: %s (%s)\n", gluErrorString(error), str);  \
+    GLenum error = glGetError();                                   \
+    if(error)                                                      \
+    { \
+      fprintf(stderr,"GL Error: %s (%s)\n", gluErrorString(error), str);  \
+    } \
 }
 
 unsigned clp2(unsigned x) 
@@ -28,10 +34,9 @@ void gl_image(Fl_Shared_Image *img, GLenum target,int level,int border,
 {
  Fl_Image *temp;
  GLvoid *imgdata;
- GLubyte *iptr=NULL;
+ GLubyte *iptr=nullptr;
  GLenum imgformat;
- int datasize,ww,hh,ld,d,i,j; 
- double ss;
+ int datasize,ww,hh,ld,d,i,j;
 
  if(!img) // spit error?
     return;
@@ -131,7 +136,7 @@ void gl_image(Fl_Shared_Image *img, GLenum target,int level,int border,
    d=4;
   } else {
    imgdata=(GLvoid*)*(temp->data());
-   iptr=NULL;
+   iptr=nullptr;
  }
  switch(d) {
     case 0:
@@ -155,7 +160,7 @@ void gl_image(Fl_Shared_Image *img, GLenum target,int level,int border,
  Fl_Shared_Image *im1=(Fl_Shared_Image *)temp;
  im1->release();
 
- if(iptr!=NULL)
+ if(iptr!=nullptr)
    delete iptr;
 }
 
@@ -164,7 +169,7 @@ void gl_image(char *fname, GLenum target,int level,int border,
 {
  Fl_Shared_Image *img;
 
- if(fname==NULL) 
+ if(fname==nullptr) 
   return;
  img = Fl_Shared_Image::get(fname);
  gl_image(img,target,level,border,internalFormat,w,h);
