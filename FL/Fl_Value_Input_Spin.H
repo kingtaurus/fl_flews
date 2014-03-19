@@ -10,7 +10,9 @@
 #include <FL/Fl_Valuator.H>
 #include <math.h>
 
-class Fl_Value_Input_Spin : public Fl_Valuator {
+class Fl_Value_Input_Spin : 
+  public Fl_Valuator 
+{
 private:
   int ix, iy, drag, indrag,sldrag;
   int delta,deltadir;
@@ -30,30 +32,28 @@ protected:
 // draw is public on 1.1.x
 public:
 #endif
-    FL_EXPORT void draw();
+  FL_EXPORT void draw();
 
 public:
-    // FUGLY HACK: since fltk 1.3 made the draw method private on now this ugly hack
-    // is needed to acces the input widget draw method, this is temporary until
-    // I get time to rewrite these composite widgets using an Fl_Group 
-    // (but then they wouldn't show nicely on fluid :-(
-    class Fl_Value_Slider_Input_Input: public Fl_Input
-    {
-      public:
-         Fl_Value_Slider_Input_Input(int x,int y,int w,int h,const char *l = 0):
-	         Fl_Input(x,y,w,h,l) {}
-	
-         void doDraw() { draw(); }
-    };
+  // FUGLY HACK: since fltk 1.3 made the draw method private on now this ugly hack
+  // is needed to acces the input widget draw method, this is temporary until
+  // I get time to rewrite these composite widgets using an Fl_Group 
+  // (but then they wouldn't show nicely on fluid :-(
+  class Fl_Value_Slider_Input_Input : 
+    public Fl_Input
+  {
+  public:
+    Fl_Value_Slider_Input_Input(int in_x,int in_y,int in_w,int in_h,const char * in_l = nullptr) :
+      Fl_Input(in_x,in_y,in_w,in_h,in_l) {}
+    void doDraw() { draw(); }
+  };
+  Fl_Value_Slider_Input_Input input;
 
-    Fl_Value_Slider_Input_Input input;
-    
+  FL_EXPORT int handle(int);
+  FL_EXPORT void resize(int,int,int,int);
+  FL_EXPORT Fl_Value_Input_Spin(int in_x,int in_y,int in_w,int in_h, const char * in_l = nullptr);
 
-    FL_EXPORT int handle(int);
-    FL_EXPORT void resize(int,int,int,int);
-    FL_EXPORT Fl_Value_Input_Spin(int x,int y,int w,int h, const char *l = 0);
-
-  void soft(char x) {soft_ = x;}
+  void soft(char in_x) {soft_ = in_x;}
   char soft() const {return soft_;}
 
   Fl_Font textfont() const {return input.textfont();}

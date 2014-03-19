@@ -9,7 +9,9 @@
 #include <FL/Fl_Valuator.H>
 #include <math.h>
 
-class Fl_Spin : public Fl_Valuator {
+class Fl_Spin : 
+  public Fl_Valuator 
+{
 private:
   int ix, iy, drag, indrag;
   int delta,deltadir;
@@ -25,13 +27,13 @@ protected:
 // draw is public on 1.1.x
 public:
 #endif
-   FL_EXPORT void draw();
+  FL_EXPORT void draw();
   
 public:
-    FL_EXPORT int handle(int);
-    FL_EXPORT Fl_Spin(int x,int y,int w,int h, const char *l = 0);
+  FL_EXPORT int handle(int);
+  FL_EXPORT Fl_Spin(int x,int y,int w,int h, const char *l = 0);
 
-  void soft(char x) {soft_ = x;}
+  void soft(char in_x) {soft_ = in_x;}
   char soft() const {return soft_;}
 
   ~Fl_Spin();

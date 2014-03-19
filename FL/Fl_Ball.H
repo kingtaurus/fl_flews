@@ -10,7 +10,9 @@
 #include <FL/Fl_Quaternion.H>
 #include <math.h>
 
-class Fl_Ball : public Fl_Valuator {
+class Fl_Ball : 
+  public Fl_Valuator
+{
 private:
   int ix, iy, drag;
   int spinning;
@@ -45,18 +47,18 @@ public:
    FL_EXPORT void draw();
 
 public:
-    FL_EXPORT void handle_drag(double v=0.0);
-    FL_EXPORT void handle_release();
-    FL_EXPORT int handle(int);
-    FL_EXPORT Fl_Ball(int x,int y,int w,int h, const char *l = 0);
+  FL_EXPORT void handle_drag(double v=0.0);
+  FL_EXPORT void handle_release();
+  FL_EXPORT int handle(int);
+  FL_EXPORT Fl_Ball(int in_x,int in_y,int in_w,int in_h, const char *in_l = 0);
 
-  void soft(char x) {soft_ = x;}
+  void soft(char in_x) {soft_ = in_x;}
   char soft() const {return soft_;}
 
   float ballscale() const {return ballsize;}
   void ballscale(float s) { ballsize=s;}
 
-  void rotateball(float rotx=0.0,float roty=0.0,float rotz=0.0);
+  void rotateball(float rotx = 0.0, float roty = 0.0,float rotz = 0.0);
   void getrot(float &rotx,float &roty,float &rotz);
   
   void stacks(int s) { ballstacks=s; }
