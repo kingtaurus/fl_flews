@@ -185,166 +185,221 @@ Fl_Multi_Value_Slider::Fl_Multi_Value_Slider(int X, int Y, int W, int H, const c
   segments[0].right=1.0;
 }
 
-void Fl_Multi_Value_Slider::draw_bg(int X, int Y, int W, int H) {
-  if (!(damage()&FL_DAMAGE_ALL)) { // not a complete redraw
+void Fl_Multi_Value_Slider::draw_bg(int X, int Y, int W, int H) 
+{
+  if (!(damage()&FL_DAMAGE_ALL))
+  { // not a complete redraw
     fl_push_clip(X, Y, W, H);
     draw_box();
     fl_pop_clip();
-  } else {
+  }
+  else
+  {
     draw_box();
   }
-  if(currseg>=0) {
-    int ww; 
-    ww = (horizontal() ? W : H);
+
+  if(currseg>=0)
+  {
+    int ww = (horizontal() ? W : H);
     if(horizontal())
-     draw_box(FL_FLAT_BOX,X+int(segments[currseg].left*ww)
-                      ,Y
-                      ,int(ww*(segments[currseg].right-segments[currseg].left))
-                      ,H
-,(textcolor_==FL_BLACK)?fl_lighter(color()):textcolor());
+    {
+      draw_box(FL_FLAT_BOX,X+int(segments[currseg].left*ww),
+               Y,
+               int(ww*(segments[currseg].right-segments[currseg].left)),
+               H,
+               (textcolor_==FL_BLACK)?fl_lighter(color()):textcolor());
+    }
     else 
-     draw_box(FL_FLAT_BOX,X
-                      ,Y+int(segments[currseg].left*ww)
-                      ,W
-                      ,int(ww*(segments[currseg].right-segments[currseg].left))
-,(textcolor_==FL_BLACK)?fl_lighter(color()):textcolor());
+    {
+      draw_box(FL_FLAT_BOX,
+               X,
+               Y+int(segments[currseg].left*ww),
+               W,
+               int(ww*(segments[currseg].right-segments[currseg].left)),
+               (textcolor_==FL_BLACK)?fl_lighter(color()):textcolor());
+    }
   }
   Fl_Color black = active_r() ? FL_FOREGROUND_COLOR : FL_INACTIVE_COLOR;
-  if (type() == FL_VERT_NICE_SLIDER) {
+  if (type() == FL_VERT_NICE_SLIDER)
+  {
     draw_box(FL_THIN_DOWN_BOX, X+W/2-2, Y, 2, H, black);
-  } else if (type() == FL_HOR_NICE_SLIDER) {
+  }
+  else if (type() == FL_HOR_NICE_SLIDER)
+  {
     draw_box(FL_THIN_DOWN_BOX, X, Y+H/2-2, W, 2, black);
   }
-
 }
 
 void Fl_Multi_Value_Slider::draw_peg(int X,int Y,int W,int H,double val, int t)
 {
- int xx, S;
- int xsl, ysl, wsl, hsl;
- int ww = (horizontal() ? W : H);
+  int xx, S;
+  int xsl, ysl, wsl, hsl;
+  int ww = (horizontal() ? W : H);
  
- S=(maximum()-minimum()<=1.0)?4:int(ww/(maximum()-minimum()));
- S=(2>=S)?4:S; 
- if(t) S/=2;
- S=(2>=S)?3:S; 
+  S = (maximum()-minimum()<=1.0) ? 4 : int(ww/(maximum()-minimum()));
+  S = (2>=S) ? 4 : S;
+
+  if(t)
+  {
+    S/=2;
+  }
+
+  S=(2>=S)?3:S; 
  
- xx = int(val*ww+.5);
- xx =(xx>=ww)?ww-1:xx;
- if (active_r()) {
-     fl_color(selection_color());  
- } else {
-     fl_color(selection_color() | 8);
- }    
- fl_push_clip(X, Y, W, H);
- if (horizontal()) {
+  xx = int(val*ww+.5);
+  xx =(xx>=ww)?ww-1:xx;
+  if (active_r())
+  {
+    fl_color(selection_color());  
+  }
+  else
+  {
+    fl_color(selection_color() | 8);
+  }    
+  fl_push_clip(X, Y, W, H);
+  if (horizontal())
+  {
     xsl = X+xx;
     wsl = S;
     ysl = Y;
     hsl = H;
     if(t)
+    {
       fl_loop(xsl,ysl, xsl+wsl, ysl+hsl/2 , xsl,ysl+hsl, xsl-wsl, ysl+hsl/2 );
-    else if(!slider_size()) 
+    }
+    else if(!slider_size())
+    {
       fl_polygon(xsl,ysl, xsl+wsl, ysl+hsl, xsl-wsl, ysl+hsl);
-    else 
+    }
+    else
+    {
       fl_polygon(xsl,ysl+hsl, xsl+wsl, ysl, xsl-wsl, ysl);
- } else {
+    }
+  }
+  else
+  {
     ysl = Y+xx;
     hsl = S;
     xsl = X;
     wsl = W;
     if(t)
+    {
      fl_loop(xsl,ysl, xsl+wsl/2, ysl-hsl,xsl+wsl, ysl , xsl+wsl/2, ysl+hsl);
-    else if(!slider_size()) 
+    }
+    else if(!slider_size())
+    {
      fl_polygon(xsl,ysl, xsl+wsl, ysl-hsl, xsl+wsl, ysl+hsl);
-    else 
-     fl_polygon(xsl+wsl,ysl, xsl, ysl-hsl, xsl, ysl+hsl);
- }
- fl_pop_clip();
+    }
+    else
+    {
+      fl_polygon(xsl+wsl,ysl, xsl, ysl-hsl, xsl, ysl+hsl);
+    }
+  }
+  fl_pop_clip();
 }
 
 void Fl_Multi_Value_Slider::draw() 
 {
- int sxx = x(), syy = y(), sww = w(), shh = h();
- int X,Y,W,H,iseg; 
- int ww; 
- X=sxx+Fl::box_dx(box());
- Y=syy+Fl::box_dy(box());
- W=sww-Fl::box_dw(box());
- H=shh-Fl::box_dh(box());
- ww = (horizontal() ? W : H);
- if (damage()&FL_DAMAGE_ALL) draw_box(box(),sxx,syy,sww,shh,color());
- draw_bg(X,Y,W,H);
+  int sxx = x(), syy = y(), sww = w(), shh = h();
+  int X,Y,W,H,iseg; 
+  X=sxx+Fl::box_dx(box());
+  Y=syy+Fl::box_dy(box());
+  W=sww-Fl::box_dw(box());
+  H=shh-Fl::box_dh(box());
+  if (damage()&FL_DAMAGE_ALL)
+  {
+    draw_box(box(),sxx,syy,sww,shh,color());
+  }
+  draw_bg(X,Y,W,H);
 
- for(iseg=0;iseg<nsegs;iseg++){
-   draw_peg( X,Y,W, H, segments[iseg].left);
-   if(mvals && segments[iseg].middle>=0)
-     draw_peg( X,Y,W, H, segments[iseg].middle,1);
- }
- draw_peg( X,Y,W, H, segments[iseg-1].right);
+  for(iseg=0;iseg<nsegs;iseg++)
+  {
+    draw_peg( X,Y,W, H, segments[iseg].left);
+    if(mvals && segments[iseg].middle>=0)
+    {
+      draw_peg( X,Y,W, H, segments[iseg].middle,1);
+    }
+  }
+  draw_peg( X,Y,W, H, segments[iseg-1].right);
 }
 
 #define _M_ABS(x) (((x)>0)?(x):-(x))
 int Fl_Multi_Value_Slider::handle(int event, int X, int Y, int W, int H)
 {
- int mx,ww,iseg,l,r,m,S;
- int slider_resp;
- double val = value();
- double nval;
- X+=Fl::box_dx(box());
- Y+=Fl::box_dy(box());
- W-=Fl::box_dw(box());
- H-=Fl::box_dh(box());
- ww = (horizontal() ? W : H);
- mx = (horizontal() ? Fl::event_x()-X : Fl::event_y()-Y);
- nval =((double(mx)/double(ww))*double(maximum()-minimum()));
- S=(maximum()-minimum()<=1.0)?4:int(ww/(maximum()-minimum()));
- S=(2>=S)?4:S; 
+  int mx,ww,iseg,l,r,m,S;
+  int slider_resp;
+  double val = value();
+  double nval;
+  X+=Fl::box_dx(box());
+  Y+=Fl::box_dy(box());
+  W-=Fl::box_dw(box());
+  H-=Fl::box_dh(box());
+  ww = (horizontal() ? W : H);
+  mx = (horizontal() ? Fl::event_x()-X : Fl::event_y()-Y);
+  nval =((double(mx)/double(ww))*double(maximum()-minimum()));
+  S=(maximum()-minimum()<=1.0)?4:int(ww/(maximum()-minimum()));
+  S=(2>=S)?4:S; 
 
- slider_resp=1;
+  slider_resp=1;
 
- switch(event) {
-   case FL_PUSH: 
-     if (!Fl::event_inside(X, Y, W, H)) return 0;
-     if (Fl::visible_focus()) Fl::focus(this);
-     value(clamp(nval));
-     iseg=findseg(nval);
-     dragelem=8;
-     l=int(segments[iseg].left*ww);
-     r=int(segments[iseg].right*ww);
-     m=int(segments[iseg].middle*ww);
-     if(_M_ABS(mx-l)<=S) {
-       dragelem=1;
-       if(iseg==currseg+1) {
-         iseg=currseg;
-         dragelem=2;
+  switch(event) 
+  {
+  case FL_PUSH: 
+    if (!Fl::event_inside(X, Y, W, H))
+    {
+    return 0;
+    }
+    if (Fl::visible_focus())
+    {
+      Fl::focus(this);
+    }
+    value(clamp(nval));
+    iseg=findseg(nval);
+    dragelem=8;
+    l=int(segments[iseg].left*ww);
+    r=int(segments[iseg].right*ww);
+    m=int(segments[iseg].middle*ww);
+    if(_M_ABS(mx-l)<=S)
+    {
+      dragelem=1;
+      if(iseg==currseg+1)
+      {
+        iseg=currseg;
+        dragelem=2;
       }
-     }
-     if(_M_ABS(mx-r)<=S) {
-       dragelem=2;
-        if(iseg==currseg-1) {
-          iseg=currseg;
-          dragelem=1;
-        }
-     }
-     if(mvals && segments[iseg].middle>=0) {
-       S/=2;
-       S=(2>=S)?3:S; 
-       if(_M_ABS(mx-m)<=S) 
-         dragelem=4;
-     }
-     if(iseg!=currseg) 
-          currseg=iseg;
-
-     handle_push();
-   case FL_DRAG:
-     handle_drag(clamp(nval));
-   case FL_RELEASE:
-     value(clamp(nval));
-     val=normval(nval);
-     switch(dragelem){
-     case 1: 
-       if(currseg>=1 && 
+    }
+    if(_M_ABS(mx-r)<=S)
+    {
+      dragelem=2;
+      if(iseg==currseg-1)
+      {
+        iseg=currseg;
+        dragelem=1;
+      }
+    }
+    if(mvals && segments[iseg].middle>=0)
+    {
+      S/=2;
+      S=(2>=S)?3:S; 
+      if(_M_ABS(mx-m)<=S)
+      { 
+        dragelem=4;
+      }
+    }
+    if(iseg!=currseg)
+    {
+      currseg=iseg;
+    }
+    handle_push();
+  case FL_DRAG:
+    handle_drag(clamp(nval));
+  case FL_RELEASE:
+    value(clamp(nval));
+    val=normval(nval);
+    switch(dragelem)
+    {
+    case 1: 
+      if(currseg>=1 && 
         (val>=segments[currseg-1].left && val<=segments[currseg].right) && 
         ((mvals &&
         ((segments[currseg].middle>=0 && val<=segments[currseg].middle) 
@@ -410,8 +465,8 @@ int Fl_Multi_Value_Slider::handle(int event, int X, int Y, int W, int H)
      break;
    default:
      slider_resp=0;
- }
- return slider_resp;
+  }
+  return slider_resp;
 }
 
 int Fl_Multi_Value_Slider::handle(int event) 

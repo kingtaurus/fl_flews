@@ -205,12 +205,16 @@ Fl_Value_Input_Spin::~Fl_Value_Input_Spin() {
   Fl::remove_timeout(repeat_callback, this);
 }
 
-Fl_Value_Input_Spin::Fl_Value_Input_Spin(int x, int y, int w, int h, const char* l)
-: Fl_Valuator(x,y,w,h,l), input(x, y, w, h, 0) {
-
+Fl_Value_Input_Spin::Fl_Value_Input_Spin(int in_x, int in_y, int in_w, int in_h, const char* in_l) : 
+  Fl_Valuator(in_x,in_y,in_w,in_h,in_l), 
+  input(in_x, in_y, in_w, in_h, nullptr)
+{
   soft_ = 0;
-  if (input.parent())  // defeat automatic-add
+  if (input.parent())
+  {
+    // defeat automatic-add
     ((Fl_Group*)input.parent())->remove(input);
+  }
   input.parent((Fl_Group *)this); // kludge!
   input.callback(input_cb, this);
   input.when(FL_WHEN_CHANGED);
@@ -219,8 +223,8 @@ Fl_Value_Input_Spin::Fl_Value_Input_Spin(int x, int y, int w, int h, const char*
   box(input.box());
   value_damage();
   buttonssize(15);
-  ix=x;
-  iy=y; 
+  ix=in_x;
+  iy=in_y; 
   drag=0;
   indrag=0;
   sldrag=0;

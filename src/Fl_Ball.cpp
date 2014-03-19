@@ -30,153 +30,161 @@
 
 void Fl_Ball::rotateball(float rotx,float roty,float rotz)
 {
- float a[3];
- a[0]=rotx;
- a[1]=roty;
- a[2]=rotz;
- curquat.fromEuler(a);   
- curquat.toRotMatrix(mat);
+  float a[3];
+  a[0]=rotx;
+  a[1]=roty;
+  a[2]=rotz;
+  curquat.fromEuler(a);   
+  curquat.toRotMatrix(mat);
 }		     
 
 void Fl_Ball::getrot(float &rotx,float &roty,float &rotz)
 {
- float a[3];
- fl_rotMatrixToEuler(mat, a);
- rotx=a[0];
- roty=a[1];
- rotz=a[2];   
+  float a[3];
+  fl_rotMatrixToEuler(mat, a);
+  rotx=a[0];
+  roty=a[1];
+  rotz=a[2];   
 }
-void Fl_Ball::transform_ball_vertex(float &x,float &y,float &z)
+void Fl_Ball::transform_ball_vertex(float& in_x,float& in_y,float& in_z)
 {
  float x1,y1,z1;
-    x1= x * mat[0][0] + y * mat[1][0] + z * mat[2][0];
-    y1= x * mat[0][1] + y * mat[1][1] + z * mat[2][1];
-    z1= x * mat[0][2] + y * mat[1][2] + z * mat[2][2];
- x=x1;
- y=y1;
- z=z1;
+    x1 = in_x * mat[0][0] + in_y * mat[1][0] + in_z * mat[2][0];
+    y1 = in_x * mat[0][1] + in_y * mat[1][1] + in_z * mat[2][1];
+    z1 = in_x * mat[0][2] + in_y * mat[1][2] + in_z * mat[2][2];
+ in_x = x1;
+ in_y = y1;
+ in_z = z1;
  return;
 }
 
-void Fl_Ball::rotate(float &x,float &y,float &z, 
+void Fl_Ball::rotate(float &in_x,float &in_y,float &in_z, 
                      float rotx,float roty,float rotz)
 {
- float cx,sx,cy,sy,cz,sz;
- float x1,y1,z1;
- cx=(float)cos(rotx);
- cy=(float)cos(roty);
- cz=(float)cos(rotz);
- sx=(float)sin(rotx);
- sy=(float)sin(roty);
- sz=(float)sin(rotz);
- x1 = x*cz +y*sz;
- y1 = y*cz -x*sz;
- z1=z;
- x = x1*cy + z1*sy;
- y = y1;
- z = z1*cy - x1*sy; 
- x1= x;
- y1= y*cx + z*sx;
- z1= z*cx - y*sx;
- x=x1;
- y=y1;
- z=z1;
+  float cx,sx,cy,sy,cz,sz;
+  float x1,y1,z1;
+  cx=float(cos(rotx));
+  cy=float(cos(roty));
+  cz=float(cos(rotz));
+  sx=float(sin(rotx));
+  sy=float(sin(roty));
+  sz=float(sin(rotz));
+  x1 = in_x*cz + in_y*sz;
+  y1 = in_y*cz - in_x*sz;
+  z1 = in_z;
+  in_x = x1*cy + z1*sy;
+  in_y = y1;
+  in_z = z1*cy - x1*sy; 
+  x1= in_x;
+  y1= in_y*cx + in_z*sx;
+  z1= in_z*cx - in_y*sx;
+  in_x=x1;
+  in_y=y1;
+  in_z=z1;
 }
 
-void Fl_Ball::draw_solid_ball(float radius,int slices,int stacks)
+void Fl_Ball::draw_solid_ball(float radius,int in_slices,int in_stacks)
 {
   float rho, drho, theta, dtheta;
   float srho,crho,snrho,cnrho;
   float ctheta,stheta;
   int i,j;
-  float x[4],y[4],z[4];
+  float local_x[4], local_y[4], local_z[4];
   float xv0,yv0;
   float xv1,yv1;
   float zn;
   
-  drho = (float)M_PI / (float) stacks;
-  dtheta = (float)2.0 * (float)M_PI / (float) slices;
-  for (i=0;i<stacks;i++) { 
+  drho = float(M_PI) / float(in_stacks);
+  dtheta = float(2.0) * float(M_PI) / float(in_slices);
+  for (i=0;i<in_stacks;i++)
+  { 
     rho = i * drho;
-    srho=(float)sin(rho);
-    crho=(float)cos(rho);
-    snrho=(float)sin(rho+drho);
-    cnrho=(float)cos(rho+drho);
-    for (j=0;j<slices;j++) {
-       theta = j * dtheta;
-       ctheta=(float)cos(theta);
-       stheta=(float)sin(theta);
-       x[0] = ctheta * srho;
-       y[0] = stheta * srho;
-       z[0] = crho;
-       transform_ball_vertex(x[0],y[0],z[0]);       
-       x[3] = ctheta * snrho;
-       y[3] = stheta * snrho;
-       z[3] = cnrho;
-       transform_ball_vertex(x[3],y[3],z[3]);       
+    srho=float(sin(rho));
+    crho=float(cos(rho));
+    snrho=float(sin(rho+drho));
+    cnrho=float(cos(rho+drho));
+    for (j=0;j<in_slices;j++)
+    {
+      theta = j * dtheta;
+      ctheta=float(cos(theta));
+      stheta=float(sin(theta));
+      local_x[0] = ctheta * srho;
+      local_y[0] = stheta * srho;
+      local_z[0] = crho;
+      transform_ball_vertex(local_x[0],local_y[0],local_z[0]);       
+      local_x[3] = ctheta * snrho;
+      local_y[3] = stheta * snrho;
+      local_z[3] = cnrho;
+      transform_ball_vertex(local_x[3],local_y[3],local_z[3]);       
        
-       theta = (j+1) * dtheta;
-       ctheta=(float)cos(theta);
-       stheta=(float)sin(theta);
-       x[1] = ctheta * srho;
-       y[1] = stheta * srho;
-       z[1] = crho;
-       transform_ball_vertex(x[1],y[1],z[1]);       
-       x[2] = ctheta * snrho;
-       y[2] = stheta * snrho;
-       z[2] = cnrho;
-       transform_ball_vertex(x[2],y[2],z[2]);       
+      theta = (j+1) * dtheta;
+      ctheta=float(cos(theta));
+      stheta=float(sin(theta));
+      local_x[1] = ctheta * srho;
+      local_y[1] = stheta * srho;
+      local_z[1] = crho;
+      transform_ball_vertex(local_x[1],local_y[1],local_z[1]);       
+      local_x[2] = ctheta * snrho;
+      local_y[2] = stheta * snrho;
+      local_z[2] = cnrho;
+      transform_ball_vertex(local_x[2],local_y[2],local_z[2]);       
 
-       xv0=x[1]-x[0];      yv0=y[1]-y[0];       
-       xv1=x[2]-x[1];      yv1=y[2]-y[1];       
-       zn=xv0*yv1-xv1*yv0;
-       if(zn>=-1e-6) {
-         if((i+j)&1) {
-            fl_color(contrast(FL_WHITE,selection_color()));
-         } else fl_color(selection_color());    
-         fl_begin_polygon();
-           fl_vertex( (x[0]*radius), (y[0]*radius) );
-           fl_vertex( (x[1]*radius), (y[1]*radius) );
-           fl_vertex( (x[2]*radius), (y[2]*radius) );
-           fl_vertex( (x[3]*radius), (y[3]*radius) );
-         fl_end_polygon();
-       }
+      xv0=local_x[1]-local_x[0];      yv0=local_y[1]-local_y[0];       
+      xv1=local_x[2]-local_x[1];      yv1=local_y[2]-local_y[1];       
+      zn=xv0*yv1-xv1*yv0;
+      if(zn>=-1e-6)
+      {
+        if((i+j)&1)
+        {
+          fl_color(contrast(FL_WHITE,selection_color()));
+        }
+        else
+        {
+          fl_color(selection_color());
+        }
+        fl_begin_polygon();
+           fl_vertex( (local_x[0]*radius), (local_y[0]*radius) );
+           fl_vertex( (local_x[1]*radius), (local_y[1]*radius) );
+           fl_vertex( (local_x[2]*radius), (local_y[2]*radius) );
+           fl_vertex( (local_x[3]*radius), (local_y[3]*radius) );
+        fl_end_polygon();
+      }
     }
   }
 }
 
-void Fl_Ball::draw_wire_ball(float radius,int slices,int stacks)
+void Fl_Ball::draw_wire_ball(float radius,int in_slices,int in_stacks)
 {
   float rho, drho, theta, dtheta;
   int i,j;
-  float x,y,z;
+  float local_x, local_y, local_z;
   
-  drho = (float)M_PI / (float) stacks;
-  dtheta = (float)2.0 * (float)M_PI / (float) slices;
-  for (i=1;i<stacks;i++) {  
+  drho = float(M_PI) / float(in_stacks);
+  dtheta = float(2.0) * float(M_PI) / float(in_slices);
+  for (i=1;i<in_stacks;i++) {  
     rho = i * drho;
     fl_begin_line();
-    for (j=0;j<=slices;j++) {
+    for (j=0;j<=in_slices;j++) {
        theta = j * dtheta;
-       x = (float)cos(theta) * (float)sin(rho);
-       y = (float)sin(theta) * (float)sin(rho);
-       z = (float)cos(rho);
-       transform_ball_vertex(x,y,z);
-       fl_vertex( (x*radius), (y*radius) );
+       local_x = float(cos(theta)) * float(sin(rho));
+       local_y = float(sin(theta)) * float(sin(rho));
+       local_z = float(cos(rho));
+       transform_ball_vertex(local_x,local_y,local_z);
+       fl_vertex( (local_x*radius), (local_y*radius) );
     }
     fl_end_line();
   }
  
-  for (j=0;j<=slices;j++) {
+  for (j=0;j<=in_slices;j++) {
     theta = j * dtheta;
     fl_begin_line();
-    for (i=0;i<=stacks;i++) {
+    for (i=0;i<=in_stacks;i++) {
        rho = i * drho;
-       z = (float)cos(rho);
-       x = (float)cos(theta) * (float)sin(rho);
-       y = (float)sin(theta) * (float)sin(rho);
-       transform_ball_vertex(x,y,z);
-       fl_vertex( (x*radius), (y*radius) );
+       local_z = float(cos(rho));
+       local_x = float(cos(theta)) * float(sin(rho));
+       local_y = float(sin(theta)) * float(sin(rho));
+       transform_ball_vertex(local_x,local_y,local_z);
+       fl_vertex( (local_x*radius), (local_y*radius) );
     }
     fl_end_line();
   }
@@ -317,11 +325,12 @@ Fl_Ball::~Fl_Ball() {
   Fl::remove_timeout(repeat_callback, this);
 }
 
-Fl_Ball::Fl_Ball(int x, int y, int w, int h, const char* l)
-: Fl_Valuator(x,y,w,h,l) {
+Fl_Ball::Fl_Ball(int in_x, int in_y, int in_w, int in_h, const char * in_l) :
+  Fl_Valuator(in_x,in_y,in_w,in_h,in_l)
+{
   soft_ = 0;
-  ix=x;
-  iy=y; 
+  ix = in_x;
+  iy = in_y; 
   drag=0;
   spinning=0;
   mouseobj = 0;
@@ -330,9 +339,11 @@ Fl_Ball::Fl_Ball(int x, int y, int w, int h, const char* l)
   slices(10);  
   rotateball();
   
-  for(int i=0; i<4; i++) { 
-    for(int j=0; j<4; j++) {
-      mat[i][j]=(i==j)?(float)1.0:(float)0.0;
+  for(int i=0; i<4; i++) 
+  { 
+    for(int j=0; j<4; j++)
+    {
+      mat[i][j]=(i==j)? float(1.0) : float(0.0);
     }
   } 
   fl_trackball(curquat, 0.0, 0.0, 0.0, 0.0);

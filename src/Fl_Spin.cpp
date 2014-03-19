@@ -141,13 +141,13 @@ Fl_Spin::~Fl_Spin() {
   Fl::remove_timeout(repeat_callback, this);
 }
 
-Fl_Spin::Fl_Spin(int x, int y, int w, int h, const char* l)
-: Fl_Valuator(x,y,w,h,l) {
-
+Fl_Spin::Fl_Spin(int in_x, int in_y, int in_w, int in_h, const char* in_l) : 
+  Fl_Valuator(in_x,in_y,in_w,in_h,in_l)
+{
   soft_ = 0;
   align(FL_ALIGN_LEFT);
-  ix=x;
-  iy=y; 
+  ix=in_x;
+  iy=in_y; 
   drag=0;
   indrag=0;
   mouseobj = 0;
