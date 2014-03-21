@@ -15,7 +15,6 @@ if(NOT DEFINED FLTK_INCLUDE_DIR)
 	find_package(FLTK REQUIRED)
 endif(NOT DEFINED FLTK_INCLUDE_DIR)
 
-#find_package(FLTK REQUIRED)
 include_directories(${FLTK_INCLUDE_DIR})
 
 macro(_flews_generate_symlink_code CODE SRC DEST)
@@ -45,22 +44,7 @@ set(libdir          ${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR})
 set(includedir      ${CMAKE_INSTALL_PREFIX}/include)
 set(PACKAGE_VERSION ${LIBFLEWS_VERSION})
 set(LIBS            "-L${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR} -lflews -lm -ldl")
-set(Cflags          "-I${includedir} -std=c++11")
-
-#flews.pc (to configure the library)
-
-#${FLTK_LIBRARIES}
-#${FLTK_HEADERS}
-
-#prefix=@prefix@
-#exec_prefix=@exec_prefix@
-#libdir=@libdir@
-#includedir=@includedir@
-#Name: flews
-#Description: A set of extended Widgets for the excellent FLTK library
-#Version: @PACKAGE_VERSION@
-#Libs: -L${libdir} -lflews
-#Cflags: -I${includedir}/FL
+set(Cflags          "-I${includedir})
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libflews.pc.in
   ${CMAKE_CURRENT_BINARY_DIR}/${LIBFLEWS_NAME}.pc @ONLY)
@@ -69,18 +53,6 @@ _flews_generate_symlink_code(FLEWS_PC_INSTALL_CODE
   ${CMAKE_CURRENT_BINARY_DIR}/libflews.pc)
 install(CODE ${FLEWS_PC_INSTALL_CODE})
 
-#http://www.opensource.apple.com/source/X11libs/X11libs-60/libpng/libpng-1.5.1/libpng-config.in?txt
-#configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libflews-config.in
-#  ${CMAKE_CURRENT_BINARY_DIR}/${LIBFLEWS_NAME}-config @ONLY)
-#_flews_generate_symlink_code(FLEWS_PC_INSTALL_CODE
-#  ${CMAKE_CURRENT_BINARY_DIR}/${LIBFLEWS_NAME}-config
-#  ${CMAKE_CURRENT_BINARY_DIR}/libflews-config)
-#install(CODE ${FLEWS_CONFIG_INSTALL_CODE})
-
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 add_subdirectory(src)
-
-
-
-
 

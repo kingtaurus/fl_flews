@@ -23,7 +23,6 @@ set(libflews_sources
 	gl_image.cpp
 )
 
-add_definitions(-std=c++11)
 add_library( flews        SHARED ${libflews_sources} )
 add_library( flews-static STATIC ${libflews_sources} )
 SET_TARGET_PROPERTIES( flews-static PROPERTIES OUTPUT_NAME "flews")
