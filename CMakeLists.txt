@@ -45,6 +45,7 @@ set(includedir      ${CMAKE_INSTALL_PREFIX}/include)
 set(PACKAGE_VERSION ${LIBFLEWS_VERSION})
 set(LIBS            "-L${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_LIBDIR} -lflews -lm -ldl")
 set(Cflags          "-I${includedir}")
+set(Cxxlags         "-I${includedir}")
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/libflews.pc.in
   ${CMAKE_CURRENT_BINARY_DIR}/${LIBFLEWS_NAME}.pc @ONLY)

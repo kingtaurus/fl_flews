@@ -38,7 +38,7 @@ public:
     public Fl_Input
   {
   public:
-    Fl_Value_Slider_Input_Input(int in_x,int in_y,int in_w,int in_h,const char * in_l = nullptr)
+    Fl_Value_Slider_Input_Input(int in_x,int in_y,int in_w,int in_h,const char * in_l = 0)
       : Fl_Input(in_x,in_y,in_w,in_h,in_l) {}
     void doDraw() { draw(); }
   };
@@ -46,7 +46,7 @@ public:
   Fl_Value_Slider_Input_Input input;
   FL_EXPORT int handle(int);
   FL_EXPORT void resize(int,int,int,int);
-  FL_EXPORT Fl_Value_Slider_Input(int x,int y,int w,int h, const char *l = nullptr);
+  FL_EXPORT Fl_Value_Slider_Input(int x,int y,int w,int h, const char *l = 0);
 
   void soft(char in_x) {soft_ = in_x;}
   char soft() const {return soft_;}

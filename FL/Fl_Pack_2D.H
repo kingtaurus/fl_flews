@@ -9,7 +9,7 @@ class Fl_Pack_2D :
 {
   int _nstrips;
 public:
-  Fl_Pack_2D(int in_x,int in_y,int in_w ,int in_h,const char *in_l = nullptr) :
+  Fl_Pack_2D(int in_x,int in_y,int in_w ,int in_h,const char *in_l = 0) :
     Fl_Pack(in_x,in_y,in_w,in_h,in_l)
   {
       _nstrips=1;

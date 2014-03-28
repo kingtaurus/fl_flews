@@ -34,7 +34,7 @@ void gl_image(Fl_Shared_Image *img, GLenum target,int level,int border,
 {
   Fl_Image *temp;
   GLvoid *imgdata;
-  GLubyte *iptr=nullptr;
+  GLubyte *iptr=0;
   GLenum imgformat;
   int datasize,ww,hh,d,i,j;
 
@@ -160,7 +160,7 @@ void gl_image(Fl_Shared_Image *img, GLenum target,int level,int border,
   else
   {
     imgdata=(GLvoid*)*(temp->data());
-    iptr=nullptr;
+    iptr=0;
   }
   switch(d)
   {
@@ -185,7 +185,7 @@ void gl_image(Fl_Shared_Image *img, GLenum target,int level,int border,
   Fl_Shared_Image *im1=(Fl_Shared_Image *)temp;
   im1->release();
 
-  if(iptr!=nullptr)
+  if(iptr!=0)
   {
     delete iptr;
   }
@@ -196,7 +196,7 @@ void gl_image(char *fname, GLenum target,int level,int border,
 {
   Fl_Shared_Image *img;
 
-  if(fname==nullptr)
+  if(fname==0)
   {
     return;
   }

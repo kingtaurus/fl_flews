@@ -207,7 +207,7 @@ Fl_Value_Input_Spin::~Fl_Value_Input_Spin() {
 
 Fl_Value_Input_Spin::Fl_Value_Input_Spin(int in_x, int in_y, int in_w, int in_h, const char* in_l) : 
   Fl_Valuator(in_x,in_y,in_w,in_h,in_l), 
-  input(in_x, in_y, in_w, in_h, nullptr)
+  input(in_x, in_y, in_w, in_h, 0)
 {
   soft_ = 0;
   if (input.parent())
