@@ -27,11 +27,11 @@ protected:
 // draw is public on 1.1.x
 public:
 #endif
-  FL_EXPORT void draw();
+  FL_EXPORT void draw() override;
   
 public:
-  FL_EXPORT int handle(int);
-  FL_EXPORT Fl_Spin(int x,int y,int w,int h, const char *l = 0);
+  FL_EXPORT int handle(int) override;
+  FL_EXPORT Fl_Spin(int x,int y,int w,int h, const char *l = nullptr);
 
   void soft(char in_x) {soft_ = in_x;}
   char soft() const {return soft_;}

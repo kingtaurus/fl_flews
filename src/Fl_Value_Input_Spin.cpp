@@ -15,8 +15,8 @@ static char hack_o_rama;
 void Fl_Value_Input_Spin::input_cb(Fl_Widget*, void* v) {
   Fl_Value_Input_Spin& t = *(Fl_Value_Input_Spin*)v;
   double nv;
-  if (t.step()>=1.0) nv = strtol(t.input.value(), 0, 0);
-  else nv = strtod(t.input.value(), 0);
+  if (t.step()>=1.0) nv = strtol(t.input.value(), nullptr, 0);
+  else nv = strtod(t.input.value(), nullptr);
   hack_o_rama = 1;
   t.handle_push();
   t.handle_drag(nv);
@@ -207,7 +207,7 @@ Fl_Value_Input_Spin::~Fl_Value_Input_Spin() {
 
 Fl_Value_Input_Spin::Fl_Value_Input_Spin(int in_x, int in_y, int in_w, int in_h, const char* in_l) : 
   Fl_Valuator(in_x,in_y,in_w,in_h,in_l), 
-  input(in_x, in_y, in_w, in_h, 0)
+  input(in_x, in_y, in_w, in_h, nullptr)
 {
   soft_ = 0;
   if (input.parent())

@@ -19,8 +19,8 @@ static int drag   = 0;
 void Fl_Value_Slider_Input::input_cb(Fl_Widget*, void* v) {
   Fl_Value_Slider_Input& t = *(Fl_Value_Slider_Input*)v;
   double nv;
-  if (t.step()>=1.0) nv = strtol(t.input.value(), 0, 0);
-  else nv = strtod(t.input.value(), 0);
+  if (t.step()>=1.0) nv = strtol(t.input.value(), nullptr, 0);
+  else nv = strtod(t.input.value(), nullptr);
   hack_o_rama = 1;
   t.handle_push();
   t.handle_drag(nv);
@@ -196,7 +196,7 @@ int Fl_Value_Slider_Input::handle(int event) {
 
 Fl_Value_Slider_Input::Fl_Value_Slider_Input(int in_x, int in_y, int in_w, int in_h, const char* in_l) : 
   Fl_Value_Slider(in_x,in_y,in_w,in_h,in_l),
-  input(in_x, in_y, in_w, in_h, 0)
+  input(in_x, in_y, in_w, in_h, nullptr)
 {
   soft_ = 0;
   if (input.parent())

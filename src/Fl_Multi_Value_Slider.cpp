@@ -124,7 +124,7 @@ int Fl_Multi_Value_Slider::setsegments(int n, double *slist)
 {
  int i;
 
- if(n<=0 || slist==0)
+ if(n<=0 || slist==nullptr)
    return FL_VALUESEG_INVALID;
 
  nsegs=n;
@@ -149,7 +149,7 @@ double * Fl_Multi_Value_Slider::getsegments(int &n)
  n=nsegs;
  if(nsegs<=0)
  {
-   return 0;
+   return nullptr;
  }
  slist=(double *)malloc(sizeof(double)*nsegs);
  for(i=0; i<n; i++) {

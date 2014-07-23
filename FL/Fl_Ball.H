@@ -44,13 +44,13 @@ protected:
 // draw is public on 1.1.x
 public:
 #endif
-   FL_EXPORT void draw();
+   FL_EXPORT void draw() override;
 
 public:
   FL_EXPORT void handle_drag(double v=0.0);
   FL_EXPORT void handle_release();
-  FL_EXPORT int handle(int);
-  FL_EXPORT Fl_Ball(int in_x,int in_y,int in_w,int in_h, const char *in_l = 0);
+  FL_EXPORT int handle(int) override;
+  FL_EXPORT Fl_Ball(int in_x,int in_y,int in_w,int in_h, const char *in_l = nullptr);
 
   void soft(char in_x) {soft_ = in_x;}
   char soft() const {return soft_;}

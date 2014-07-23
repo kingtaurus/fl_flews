@@ -28,7 +28,7 @@ protected:
 // draw is public on 1.1.x
 public:
 #endif
-   FL_EXPORT void draw();
+   FL_EXPORT void draw() override;
     
 public:
     double normval(double v);
@@ -41,9 +41,9 @@ public:
     void draw_peg(int X,int Y,int W,int H,double val, int t=0);
 
     int handle(int event, int X, int Y, int W, int H);
-    int handle(int);
+    int handle(int) override;
     int middlevals(int m=-1);
-    Fl_Multi_Value_Slider(int x,int y,int w,int h, const char *l = 0);
+    Fl_Multi_Value_Slider(int x,int y,int w,int h, const char *l = nullptr);
 
     Fl_Font textfont() const {return (Fl_Font)textfont_;}
     void textfont(uchar s) {textfont_ = s;}
