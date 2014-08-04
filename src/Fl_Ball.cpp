@@ -10,9 +10,13 @@
 #include "FL/Fl_Ball.H"
 #include <FL/fl_draw.H>
 
-#ifndef _WIN32
-#include <values.h>
-#endif
+#ifdef __APPLE__
+  #include <float.h>
+#else
+  #include <values.h>
+#endif // __APPLE__
+
+
 
 #ifndef M_PI
 #define M_PI            3.14159265358979323846

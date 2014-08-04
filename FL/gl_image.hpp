@@ -1,7 +1,11 @@
 #ifndef _GL_IMAGE_HPP_
 #define _GL_IMAGE_HPP_
 #include <FL/Fl_Shared_Image.H>
+#ifdef __APPLE__
+#include <OpenGL/glu.h>
+#else
 #include <GL/glu.h>
+#endif
 
 /**Converts an FLTK shared image Fl_Image into an openGL texture,
    parameters and behavior are equivalent to glTexImage2D, which means that         the user must create the object names, proxys, etc as in normal opengl. 
