@@ -23,10 +23,18 @@ set(libflews_sources
 	gl_image.cpp
 )
 
+
+if(NOT DEFINED FLTK_INCLUDE_DIR)
+	find_package(FLTK REQUIRED)
+endif(NOT DEFINED FLTK_INCLUDE_DIR)
+
 add_library( flews        SHARED ${libflews_sources} )
+TARGET_LINK_LIBRARIES( flews dl fltk fltk_gl glu gl )
+
 add_library( flews-static STATIC ${libflews_sources} )
 SET_TARGET_PROPERTIES( flews-static PROPERTIES OUTPUT_NAME "flews")
 SET_TARGET_PROPERTIES( flews-static PROPERTIES PREFIX      "lib")
+TARGET_LINK_LIBRARIES( flews-static ${FLTK_LIBRARY})
 
 install(
      TARGETS flews flews-static
@@ -47,22 +55,13 @@ install(DIRECTORY ${PROJECT_SOURCE_DIR}/inc/FL DESTINATION include/FL
 #        fluid -c $<
 #convert .fl through fluid
 
-FLTK_WRAP_UI(testflews_Ui testflews.fl)
-ADD_LIBRARY(testflews_Ui ${testflews_Ui_FLTK_UI_SRCS})
 
-ADD_EXECUTABLE(testflews testflews.cxx)
-ADD_DEPENDENCIES(testflews testflews_Ui)
-TARGET_LINK_LIBRARIES(testflews testflews_Ui)
-TARGET_LINK_LIBRARIES(testflews flews-static)
-TARGET_LINK_LIBRARIES(testflews ${FLTK_LIBRARY} dl)
-TARGET_LINK_LIBRARIES(testflews ${OPENGL_LIBRARIES})
+#FLTK_WRAP_UI(testflews_Ui testflews.fl)
+#ADD_LIBRARY(testflews_Ui ${testflews_Ui_FLTK_UI_SRCS})
 
-
-
-
-
-
-
+#ADD_EXECUTABLE(testflews testflews.cxx)
+#ADD_DEPENDENCIES(testflews testflews_Ui)
+#TARGET_LINK_LIBRARIES(testflews testflews_Ui dl flews-static ${FLTK_LIBRARY} ${OPENGL_LIBRARIES})
 
 
 

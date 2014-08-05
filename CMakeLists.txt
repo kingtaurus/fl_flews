@@ -3,6 +3,8 @@ project(libflews)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+FIND_PACKAGE(OpenGL REQUIRED)
+
 #http://www.opensource.apple.com/source/X11libs/X11libs-60/libpng/libpng-1.5.1/CMakeLists.txt
 set (LIBFLEWS_MAJOR    0)
 set (LIBFLEWS_MINOR    3)
@@ -11,11 +13,12 @@ set (LIBFLEWS_RELEASE  1)
 set(LIBFLEWS_NAME     libflews${LIBFLEWS_MAJOR}${LIBFLEWS_MINOR})
 set(LIBFLEWS_VERSION  ${LIBFLEWS_MAJOR}.${LIBFLEWS_MINOR}.${LIBFLEWS_RELEASE})
 
+
 if(NOT DEFINED FLTK_INCLUDE_DIR)
 	find_package(FLTK REQUIRED)
 endif(NOT DEFINED FLTK_INCLUDE_DIR)
 
-include_directories(${FLTK_INCLUDE_DIR})
+INCLUDE_DIRECTORIES(${FLTK_INCLUDE_DIR})
 
 macro(_flews_generate_symlink_code CODE SRC DEST)
   if(WIN32 AND NOT CYGWIN)
@@ -39,7 +42,7 @@ SET (CMAKE_C_FLAGS_MINSIZEREL     "-Os -g0 -DNDEBUG")
 SET (CMAKE_C_FLAGS_RELEASE        "-O3 -g0 -DNDEBUG")
 SET (CMAKE_C_FLAGS_RELWITHDEBINFO "-O2 -g2")
 
-SET (CMAKE_CXX_FLAGS                "-std=c++11 -Wall -Wextra -Wshadow -Wunused-variable -Wunused-parameter -Wunused-function -Wunused -Wno-system-headers -Wno-deprecated -Woverloaded-virtual -Wwrite-strings -fPIC")
+SET (CMAKE_CXX_FLAGS                "-std=c++11 -Wall -Wextra -Wno-shadow -Wunused-variable -Wno-unused-parameter -Wunused-function -Wunused -Wno-system-headers -Wno-deprecated -Woverloaded-virtual -Wwrite-strings -fPIC")
 SET (CMAKE_CXX_FLAGS_DEBUG          "-O0 -g3")
 SET (CMAKE_CXX_FLAGS_MINSIZEREL     "-Os -g0 -DNDEBUG")
 SET (CMAKE_CXX_FLAGS_RELEASE        "-O3 -g0 -DNDEBUG")
@@ -52,8 +55,12 @@ IF(NOT CMAKE_BUILD_TYPE)
 ENDIF(NOT CMAKE_BUILD_TYPE)
 
 IF(APPLE)
-  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libstdc++")
-	SET(CMAKE_CXX_LINK_FLAGS "-framework OpenGL -framework GLUT")
+  message(STATUS "Building for APPLE")
+  LINK_DIRECTORIES(${FLTK_LIBRARY_DIRS} /opt/local/lib)
+  SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+# execute_process(COMMAND fltk-config --use-gl --use-glut --use-forms --ldflags
+#                OUTPUT_VARIABLE FLTK_LINK)
+  SET(CMAKE_CXX_LINK_FLAGS "-lc++ -lSystem -framework OpenGL -framework GLUT")
 ENDIF(APPLE)
 
 if(NOT DEFINED CMAKE_INSTALL_LIBDIR)
