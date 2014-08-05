@@ -29,7 +29,7 @@ if(NOT DEFINED FLTK_INCLUDE_DIR)
 endif(NOT DEFINED FLTK_INCLUDE_DIR)
 
 add_library( flews        SHARED ${libflews_sources} )
-TARGET_LINK_LIBRARIES( flews dl fltk fltk_gl glu gl )
+TARGET_LINK_LIBRARIES( flews dl ${FLTK_LIBRARY} ${OPEN_GL_LIBRARIES} )
 
 add_library( flews-static STATIC ${libflews_sources} )
 SET_TARGET_PROPERTIES( flews-static PROPERTIES OUTPUT_NAME "flews")
